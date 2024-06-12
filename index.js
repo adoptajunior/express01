@@ -113,7 +113,17 @@ app.get('/Productos/JSON', (req, res) => {
 
 
 // Crear un filtro que cuando busque en postman por parámetro el id de un producto me devuelva ese producto
-
+app.get('/getByID/:id', (req, res) => {
+    const foundID = productos.some(producto => producto.id === +req.params.id)
+    console.log(foundID)
+    if (foundID) {
+        const result = productos.filter(producto => producto.id === +req.params.id)
+        res.status(200).send(result)
+    } else {
+        res.status(400).send({ message: 'error' })
+    }
+    console.log(result)
+})
 
 // Crear un filtro que cuando busque en postman por parámetro el nombre de un producto me devuelva ese producto
 
